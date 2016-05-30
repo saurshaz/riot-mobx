@@ -4,7 +4,7 @@ var StoreMixin = require('../scripts/mixins/StoreMixin')
 <todo>
   <ul>
     <li each={todo in _.state.s.todos}>
-    <input type='checkbox' onchange={_.state.toggleTodoStatus} value='{todo.status}'>{todo.item}</li>
+    <input type='checkbox' onchange={toggle} value='{todo.status}'>{todo.item}</li>
   </ul>
   
   
@@ -12,5 +12,9 @@ var StoreMixin = require('../scripts/mixins/StoreMixin')
   	console.log('riot reached')
     // this.mixin(StoreMixin)
     this.mixin(StoreMixin)
+    let self = this
+    toggle(e){
+    	self._.state.toggleTodoStatus(e,self.parent.tags['header-tag'])
+    }
   </script>
 </todo>

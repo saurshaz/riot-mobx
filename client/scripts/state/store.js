@@ -12,15 +12,10 @@ class AppState {
     this.s.init = true
     this.s.todos = []
     this.s.todosCount = this.s.todos.length
+    this.s.finishedCount = 0
 
     mobx.autorun(() => {
       this.s.todosCount = this.s.todos.length
-      let cnt = 0
-      this.s.todos.map((item, i) => {
-        cnt = (item.status === true) ? cnt++ : cnt
-      })
-      this.s.finishedCount = cnt
-
       console.log(this.report)
     })
   }
@@ -34,11 +29,22 @@ class AppState {
   
   toggleTodoStatus = (todo, self) => {
     event.item.todo.status=!event.item.todo.status
+    this.s.finishedCount = this.finishedCount
+    console.log(this.s.finishedCount)
+    self.update()
   }
   
   @computed get report() {
     return `Report :: progress is ` +
       `${JSON.stringify(this.s.todos)}`;
+  }
+
+  @computed get finishedCount() {
+    let cnt = 0
+    this.s.todos.map((item, i) => {
+      cnt = (item.status == true) ? cnt + 1 : cnt
+    })
+    return cnt
   }
   
 }
