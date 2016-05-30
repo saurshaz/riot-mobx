@@ -5,10 +5,10 @@ const {
 } = mobx;
 
 class AppState {
+  s = {init:false,todos:[],todosCount:0}
 
   @observable s
-  constructor(s,name) {
-    this.s = s
+  constructor(name) {
     this.s.init = true
     this.s.todos = []
     this.s.todosCount = this.s.todos.length

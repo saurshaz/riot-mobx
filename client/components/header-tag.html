@@ -1,5 +1,5 @@
 'use strict'
-let s = {}
+
 //var StoreMixin = require('../scripts/mixins/StoreMixin')
 
 <header-tag>
@@ -15,7 +15,7 @@ let s = {}
 
     this.on('mount', () => {
     	var AppState = require('../scripts/state/store')
-		let store = new AppState(s)
+		let store = new AppState()
 		self._ = {}
       	self._.state = self.opts.state || store
     })	

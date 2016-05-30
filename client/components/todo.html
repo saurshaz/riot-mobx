@@ -1,5 +1,4 @@
 'use strict'
-let s = {}
 //var StoreMixin = require('../scripts/mixins/StoreMixin')
 <todo>
   <ul>
@@ -14,8 +13,7 @@ let s = {}
     this.on('mount', () => {
 	    // self._.state.todos = self._.state.todos || []
 	    var AppState = require('../scripts/state/store')
-		let store = new AppState(s)
-		
+		let store = new AppState()
         self._.state = self.opts.state || store
 	    console.log('>> todo >> ',self._.state.s.todos)
     })
