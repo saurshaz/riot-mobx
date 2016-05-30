@@ -13,12 +13,17 @@ class AppState {
     this.s.todos = []
     this.s.todosCount = this.s.todos.length
 
-    mobx.autorun(() => console.log(this.report))
+    mobx.autorun(() => {
+      this.s.todosCount = this.s.todos.length
+      console.log(this.report)
+    })
   }
   
   addTodo = (todo, self) => {
-    this.s.todos.push({status:false,item:todo})
-    self.update()
+    if(todo && todo.trim()){
+      this.s.todos.push({status:false,item:todo})
+      self.update()
+    }
   }
   
   toggleTodoStatus = (todo) => {
@@ -33,6 +38,7 @@ class AppState {
     return `Report :: progress is ` +
       `${JSON.stringify(this.s.todos)}`;
   }
+  
 }
 
 module.exports = AppState;
