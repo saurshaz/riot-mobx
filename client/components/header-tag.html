@@ -17,7 +17,7 @@ let s = {}
     	var AppState = require('../scripts/state/store')
 		let store = new AppState(s)
 		self._ = {}
-      	self._.state = store
+      	self._.state = self.opts.state || store
     })	
    
     addIt(e){
@@ -25,7 +25,7 @@ let s = {}
 		if(code == 13) { //Enter keycode
 	    	let newTodo = self.root.querySelector('#newTodo').value
 	    	console.debug(self._.state.s.todos)
-	    	self._.state.addTodo(newTodo, self)
+	    	self._.state.addTodo(newTodo, self.parent)
 	    }
     }
 

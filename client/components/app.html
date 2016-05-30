@@ -1,0 +1,27 @@
+'use strict'
+let s = {}
+//var StoreMixin = require('../scripts/mixins/StoreMixin')
+
+<app>
+	<header-tag state={_.state}></header-tag>    
+	<todo state={_.state}></todo>
+	<script>
+  	console.log('app reached')
+    // this.mixin(StoreMixin)
+    this.on('mount', () => {
+	    // self._.state.todos = self._.state.todos || []
+	    var AppState = require('../scripts/state/store')
+		let store = new AppState(s)
+		self._ = {}
+        self._.state = store
+	    console.log('>> app >> ',self._.state.s.todos)
+		self._.state.addTodo('do this', this)
+		self._.state.addTodo('do this too', this)
+    })
+
+    this.on('*', function(eventName) {
+	    console.info('>> app >> ',eventName)
+	  })
+
+  </script>
+</app>
