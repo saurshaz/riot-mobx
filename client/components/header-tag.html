@@ -1,6 +1,6 @@
 'use strict'
 
-//var StoreMixin = require('../scripts/mixins/StoreMixin')
+var StoreMixin = require('../scripts/mixins/StoreMixin')
 
 <header-tag>
   <p>Total tasks { _.state.s.todosCount }</p>
@@ -11,21 +11,15 @@
   <script>
   	console.log('header reached')
   	let self = this
-    // this.mixin(StoreMixin)
+    this.mixin(StoreMixin)
 
-    this.on('mount', () => {
-    	var AppState = require('../scripts/state/store')
-		let store = new AppState()
-		self._ = {}
-      	self._.state = self.opts.state || store
-    })	
-   
     addIt(e){
     	let code = (e.keyCode ? e.keyCode : e.which);
-		if(code == 13) { //Enter keycode
+		  if(code == 13) { //Enter keycode
 	    	let newTodo = self.root.querySelector('#newTodo').value
 	    	console.debug(self._.state.s.todos)
 	    	self._.state.addTodo(newTodo, self.parent)
+        self.root.querySelector('#newTodo').value = ''
 	    }
     }
 

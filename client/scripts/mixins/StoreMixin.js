@@ -1,8 +1,6 @@
 'use strict'
 
 var AppState = require('../state/store')
-let s = {}
-let store = new AppState(s)
 
 module.exports = {
   // init method is a special one which can initialize
@@ -11,10 +9,11 @@ module.exports = {
   init: function (stores) {
     let self = this
     self.on('mount', () => {
+      let store = new AppState()
       self._ = {}
-      self._.state = store
-      console.debug('>>> store >>> ', self._.state.s.todos)
+      self._.state = (self.opts && self.opts.state) || store
       self.update()
+    // console.debug('>>> store >>> ', self._.state.s.todos)
     })
   }
 }

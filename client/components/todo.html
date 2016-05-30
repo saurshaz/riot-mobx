@@ -1,5 +1,6 @@
 'use strict'
-//var StoreMixin = require('../scripts/mixins/StoreMixin')
+
+var StoreMixin = require('../scripts/mixins/StoreMixin')
 <todo>
   <ul>
     <li each={todo in _.state.s.todos}>
@@ -10,21 +11,6 @@
   <script>
   	console.log('riot reached')
     // this.mixin(StoreMixin)
-    this.on('mount', () => {
-	    // self._.state.todos = self._.state.todos || []
-	    var AppState = require('../scripts/state/store')
-		let store = new AppState()
-        self._.state = self.opts.state || store
-	    console.log('>> todo >> ',self._.state.s.todos)
-    })
-
-    this.on('update', () => {
-    	console.log('>> todo >> ',(self._ &&  self._.state && self._.state.s && self._.state.s.todos))
-    })
-
-    this.on('*', function(eventName) {
-	    console.info('>> todo >> ',eventName)
-	  })
-
+    this.mixin(StoreMixin)
   </script>
 </todo>
