@@ -5,29 +5,33 @@ const {
 } = mobx;
 
 class AppState {
-  state =  {animals:[],todos:{}}
-  
-  @observable state
-  constructor(name) {
-    this.state.todos = []
+
+  @observable s
+  constructor(s,name) {
+    this.s = s
+    this.s.init = true
+    this.s.todos = []
+    this.s.todosCount = this.s.todos.length
+
     mobx.autorun(() => console.log(this.report))
   }
   
-  addTodo = (todo) => {
-    this.state.todos.push({status:false,item:todo})
+  addTodo = (todo, self) => {
+    this.s.todos.push({status:false,item:todo})
+    self.update()
   }
   
   toggleTodoStatus = (todo) => {
-    this.state.todos.map((item ,i ) => {
+    this.s.todos.map((item ,i ) => {
       if(item === todo){
-        this.state.todos[i].status = item.status === true ? false:true
+        this.s.todos[i].status = item.status === true ? false:true
       }
     })
   }
   
   @computed get report() {
     return `Report :: progress is ` +
-      `${JSON.stringify(this.state.todos)}`;
+      `${JSON.stringify(this.s.todos)}`;
   }
 }
 

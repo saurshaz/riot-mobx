@@ -1,26 +1,31 @@
 'use strict'
-
-var StoreMixin = require('../scripts/mixins/StoreMixin')
-
+let s = {}
+//var StoreMixin = require('../scripts/mixins/StoreMixin')
 <todo>
   <p>List To Do</p>
+  <header-tag></header-tag>
   <ul>
-    <li each={todo in _.state.state.todos}>
+    <li each={todo in _.state.s.todos}>
     <input type='checkbox' value='{todo.status}'>{todo.item}</li>
   </ul>
   
   
   <script>
   	console.log('riot reached')
-    this.mixin(StoreMixin)
-
+    // this.mixin(StoreMixin)
     this.on('mount', () => {
 	    // self._.state.todos = self._.state.todos || []
-	    console.log(this._)
-		this._.state.addTodo('do this')
-		this._.state.addTodo('do this too')
-		this.update()
-    	
+	    var AppState = require('../scripts/state/store')
+		let store = new AppState(s)
+		self._ = {}
+        self._.state = store
+	    console.log('>> todo >> ',self._.state.s.todos)
+		self._.state.addTodo('do this', this)
+		self._.state.addTodo('do this too', this)
+    })
+
+    this.on('update', () => {
+    	console.log('>> todo >> ',(self._ &&  self._.state && self._.state.s && self._.state.s.todos))
     })
 
   </script>

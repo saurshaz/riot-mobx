@@ -1,0 +1,33 @@
+'use strict'
+let s = {}
+//var StoreMixin = require('../scripts/mixins/StoreMixin')
+
+<header-tag>
+  <p>Total tasks { _.state.s.todosCount }</p>
+  <div>
+	<input type="text" id='newTodo'	onkeyup={addIt} >
+  </div>
+  
+  <script>
+  	console.log('header reached')
+  	let self = this
+    // this.mixin(StoreMixin)
+
+    this.on('mount', () => {
+    	var AppState = require('../scripts/state/store')
+		let store = new AppState(s)
+		self._ = {}
+      	self._.state = store
+    })	
+   
+    addIt(e){
+    	let code = (e.keyCode ? e.keyCode : e.which);
+		if(code == 13) { //Enter keycode
+	    	let newTodo = self.root.querySelector('#newTodo').value
+	    	console.debug(self._.state.s.todos)
+	    	self._.state.addTodo(newTodo, self)
+	    }
+    }
+
+  </script>
+</header-tag>
