@@ -3,9 +3,9 @@
 var StoreMixin = require('../scripts/mixins/StoreMixin')
 
 <header-tag>
-  <p>Total tasks { _.state.s.todosCount }</p>
+  <p>Total tasks {_.state.s.finishedCount}/{ _.state.s.todosCount }</p>
   <div>
-	<input type="text" id='newTodo'	onkeyup={addIt} >
+	<input type="text" id='newTodo'	onkeyup={addIt} placeholder="Add a ToDo .. " >
   </div>
   
   <script>
